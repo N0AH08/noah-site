@@ -108,6 +108,28 @@ section{position:relative}
   .hero-copy{grid-column:1;grid-row:2}
   .target{width:170%}
 }
+/* ---------- 01 Chi sono ---------- */
+.chi-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(28px,6vw,96px);align-items:start}
+.chi-photo{position:sticky;top:100px}
+.chi-photo .frame{overflow:hidden;border-radius:var(--r);aspect-ratio:3/4;background:var(--bg-2)}
+.chi-photo img{width:100%;height:100%;object-fit:cover}
+.chi-photo figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.statement{font-size:clamp(26px,3.3vw,46px);line-height:1.18;font-weight:600;letter-spacing:-.02em}
+.facts{margin-top:clamp(36px,5vw,64px);border-top:1px solid var(--rule)}
+.facts>div{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.facts dt{font-size:14px;font-weight:600;color:var(--muted)}
+.facts dd{font-size:18px;font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:clamp(36px,5vw,64px)}
+.stats .num{display:block;font-family:var(--f-display);font-size:clamp(46px,6vw,84px);line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.stats .cap{display:block;margin-top:8px;font-size:14px;line-height:1.4;color:var(--muted)}
+@media (max-width:900px){
+  .chi-grid{grid-template-columns:1fr}
+  .chi-photo{position:relative;top:0;max-width:360px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){
+  .facts>div{grid-template-columns:1fr;gap:2px}
+}
 /* @@mockly */
 /* @@arco */
 /* @@fuori */
