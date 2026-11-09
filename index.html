@@ -7,7 +7,7 @@
 <meta name="description" content="Noah Melis, 18 anni, di Sardara. Studente di informatica all'ITIS Othoca, co-founder di Mockly (siti web su misura per attività in Sardegna) e arciere compound dell'ASD Sardara Archery Team.">
 <meta name="author" content="Alessandro Noah Melis">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#08070d">
+<meta name="theme-color" content="#0D0E3A">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://n0ah08.github.io/noah-site/">
 
@@ -27,8 +27,8 @@
 <meta name="twitter:image" content="https://n0ah08.github.io/noah-site/img/og.jpg">
 
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
-<link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="img/hero-789.webp" imagesrcset="img/hero-480.webp 480w, img/hero-789.webp 789w" imagesizes="(max-width: 900px) 78vw, 36vw" fetchpriority="high">
 <link rel="stylesheet" href="css/style.css">
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js-anim");setTimeout(function(){if(!document.documentElement.dataset.ready)document.documentElement.classList.remove("js-anim")},4000)</script>
@@ -39,6 +39,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Vai al contenuto</a>
+<div class="scene-bg" aria-hidden="true"><canvas></canvas></div>
 
 <header class="site-header">
   <nav class="nav" aria-label="Principale">
@@ -54,7 +55,7 @@
 </header>
 
 <main id="main">
-<section class="hero" id="top">
+<section class="hero" id="top" data-scene="Inizio">
   <div class="wrap hero-grid">
     <div class="hero-visual">
       <!-- bersaglio: cerchi concentrici dietro la foto -->
@@ -67,21 +68,21 @@
     </div>
     <div class="hero-copy">
       <h1 class="display hero-name" aria-label="Noah Melis"><span class="ln" aria-hidden="true"><span>Noah</span></span><span class="ln" aria-hidden="true"><span>Melis</span></span></h1>
-      <p class="hero-line">Sviluppatore e co-founder di Mockly. Arciere compound.</p>
+      <p class="hero-line">Sviluppatore e co-founder di Mockly. <span class="mk">Arciere compound.</span></p>
     </div>
   </div>
-  <a class="cue" href="#chi-sono"><span>Scorri</span><i aria-hidden="true"></i></a>
+  <a class="cue" href="#chi-sono" aria-label="Scorri verso Chi sono"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
 </section>
-<section class="sec" id="chi-sono" aria-labelledby="t-chi">
+<section class="sec scene" id="chi-sono" data-scene="Chi sono" aria-labelledby="t-chi">
   <div class="wrap">
-    <header class="sec-head"><span class="sec-no">01</span><span class="sec-rule" aria-hidden="true"></span><h2 class="display" id="t-chi">Chi sono</h2></header>
+    <header class="sec-head"><span class="sec-no">01</span><h2 class="display" id="t-chi">Chi sono</h2></header>
     <div class="chi-grid">
       <figure class="chi-photo">
         <div class="frame"><img src="img/ritratto-512.webp" width="512" height="682" loading="lazy" decoding="async" alt="Noah Melis, ritratto con la maglia viola e nera dell'ASD Sardara Archery Team" data-parallax></div>
         <figcaption>Con la maglia dell'ASD Sardara Archery Team</figcaption>
       </figure>
       <div class="chi-body">
-        <p class="statement" data-split>Sono uno sviluppatore e un imprenditore di 18 anni. Costruisco siti con Mockly e tiro con l'arco compound da circa dieci anni: la stessa disciplina, la stessa precisione.</p>
+        <p class="statement" data-split>Sono uno sviluppatore e un imprenditore di 18 anni. Costruisco siti con Mockly e tiro con l'arco compound da circa dieci anni: <span class="mk">la stessa disciplina, la stessa precisione.</span></p>
         <dl class="facts">
           <div><dt>Di</dt><dd>Sardara (SU), classe 2008</dd></div>
           <div><dt>Studio</dt><dd>Informatica, ITIS Othoca di Oristano</dd></div>
@@ -98,9 +99,9 @@
     </div>
   </div>
 </section>
-<section class="sec" id="mockly" aria-labelledby="t-mockly">
+<section class="sec" id="mockly" data-scene="Mockly" aria-labelledby="t-mockly">
   <div class="wrap">
-    <header class="sec-head"><span class="sec-no">02</span><span class="sec-rule" aria-hidden="true"></span><h2 class="display" id="t-mockly">Mockly</h2></header>
+    <header class="sec-head"><span class="sec-no">02</span><h2 class="display" id="t-mockly">Mockly</h2></header>
 
     <div class="mk-intro">
       <p class="statement" data-split>Mockly è la nostra agenzia di siti web: tre studenti dell'ITIS Othoca che costruiscono siti su misura per le attività della Sardegna.</p>
@@ -154,16 +155,16 @@
       <div>
         <p>Raccontaci cosa fai: entro 48 ore hai un preventivo scritto, con prezzo e data.</p>
         <div class="mk-cta-btns">
-          <a class="btn btn--accent" href="https://wa.me/393517578080?text=Ciao%20Mockly%2C%20ho%20un%27attivit%C3%A0%20e%20vorrei%20un%20sito." target="_blank" rel="noopener" data-cursor>Scrivi su WhatsApp<span class="sr"> (si apre in una nuova scheda)</span></a>
+          <a class="btn btn--sky" href="https://wa.me/393517578080?text=Ciao%20Mockly%2C%20ho%20un%27attivit%C3%A0%20e%20vorrei%20un%20sito." target="_blank" rel="noopener" data-cursor>Scrivi su WhatsApp<span class="sr"> (si apre in una nuova scheda)</span></a>
           <a class="btn" href="https://mockly.it" target="_blank" rel="noopener" data-cursor>Vai a mockly.it<span class="sr"> (si apre in una nuova scheda)</span></a>
         </div>
       </div>
     </div>
   </div>
 </section>
-<section class="sec" id="arco" aria-labelledby="t-arco">
+<section class="sec" id="arco" data-scene="Arco" aria-labelledby="t-arco">
   <div class="wrap">
-    <header class="sec-head"><span class="sec-no">03</span><span class="sec-rule" aria-hidden="true"></span><h2 class="display" id="t-arco">Arco</h2></header>
+    <header class="sec-head"><span class="sec-no">03</span><h2 class="display" id="t-arco">Arco</h2></header>
 
     <div class="arco-intro">
       <p class="statement" data-split>Tiro con l'arco compound da circa dieci anni con l'ASD Sardara Archery Team, la società del mio paese.</p>
@@ -211,14 +212,14 @@
     </div>
   </div>
 </section>
-<section class="sec contatti" id="contatti" aria-labelledby="t-contatti">
+<section class="sec scene contatti" id="contatti" data-scene="Contatti" aria-labelledby="t-contatti">
   <!-- bersaglio grande per la chiamata finale -->
   <svg class="cta-target" viewBox="-100 -100 200 200" aria-hidden="true" focusable="false">
     <circle pathLength="1" r="96"/><circle pathLength="1" r="80"/><circle pathLength="1" r="64"/><circle pathLength="1" r="48"/><circle pathLength="1" r="32"/><circle pathLength="1" r="16"/><circle class="dot" r="5"/>
   </svg>
   <div class="wrap">
-    <header class="sec-head"><span class="sec-no">04</span><span class="sec-rule" aria-hidden="true"></span><h2 class="display" id="t-contatti">Contatti</h2></header>
-    <p class="display cta-title" data-split>Hai un progetto?<br>Scrivimi.</p>
+    <header class="sec-head"><span class="sec-no">04</span><h2 class="display" id="t-contatti">Contatti</h2></header>
+    <p class="display cta-title" data-split>Hai un progetto?<br><span class="mk">Scrivimi.</span></p>
     <p class="cta-lead">Per un sito per la tua attività scrivi a Mockly. Per tutto il resto, mi trovi qui.</p>
     <ul class="clinks">
       <li><a href="https://www.instagram.com/noah.meliss/" target="_blank" rel="noopener" data-cursor><span class="k">Instagram</span><span class="v">@noah.meliss</span></a></li>

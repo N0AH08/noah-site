@@ -45,6 +45,69 @@
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
   menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
 
+  /* ---------- Puntini a destra: dove sei nella pagina ---------- */
+  const scenes = $$('[data-scene]');
+  const dots = [];
+  if (scenes.length > 1) {
+    const nav = document.createElement('nav');
+    nav.className = 'dots';
+    nav.setAttribute('aria-label', 'Schermate');
+    scenes.forEach((sc) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', sc.dataset.scene);
+      b.innerHTML = '<span>' + sc.dataset.scene + '</span>';
+      b.addEventListener('click', () => {
+        if (lenis) lenis.scrollTo(sc.id === 'top' ? 0 : sc, { offset: -40 });
+        else sc.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      });
+      nav.appendChild(b);
+      dots.push(b);
+    });
+    document.body.appendChild(nav);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const i = scenes.indexOf(e.target);
+          dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      scenes.forEach((s) => io.observe(s));
+    }
+  }
+
+  /* ---------- Particelle azzurre che salgono piano (ferme con riduci movimento) ---------- */
+  const canvas = $('.scene-bg canvas');
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0, ps = [];
+    const make = (any) => ({ x: Math.random() * w, y: any ? Math.random() * h : h + 10, r: 0.6 + Math.random() * 1.8, v: 0.08 + Math.random() * 0.25, s: Math.random() * 6.28, g: Math.random() * 6.28 });
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      ps.forEach((p) => {
+        if (!reduce) {
+          p.y -= p.v; p.s += 0.01; p.g += 0.02; p.x += Math.sin(p.s) * 0.15;
+          if (p.y < -10) Object.assign(p, make(false));
+        }
+        ctx.fillStyle = 'rgba(127,200,216,' + (0.25 + 0.35 * (0.5 + 0.5 * Math.sin(p.g))).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+      });
+    };
+    const size = () => {
+      if (canvas.clientWidth === w && canvas.clientHeight === h) return;
+      w = canvas.clientWidth; h = canvas.clientHeight;
+      canvas.width = Math.round(w * ratio); canvas.height = Math.round(h * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ps = Array.from({ length: Math.min(110, Math.round((w * h) / 11000)) }, () => make(true));
+      if (reduce) draw();
+    };
+    size();
+    addEventListener('resize', size);
+    if (!reduce) (function loop() { if (!document.hidden) draw(); requestAnimationFrame(loop); })();
+  }
+
   /* ---------- Contatori (anche senza animazione mostrano il valore finale) ---------- */
   const counters = $$('[data-count]');
   const runCounter = (el) => {
@@ -86,10 +149,12 @@
     vis.setAttribute('aria-hidden', 'true');
     const words = [];
     nodes.forEach((n) => {
-      if (n.nodeType === 3) {
+      if (n.nodeType === 3 || (n.nodeType === 1 && n.nodeName !== 'BR')) {
+        const cls = n.nodeType === 1 ? n.className : '';
         n.textContent.split(/\s+/).filter(Boolean).forEach((w) => {
           const s = document.createElement('span');
           s.textContent = w + ' ';
+          if (cls) s.className = cls;
           vis.appendChild(s); words.push(s);
         });
       } else if (n.nodeName === 'BR') {
@@ -115,7 +180,7 @@
       const ln = document.createElement('span');
       ln.className = 'ln';
       const inner = document.createElement('span');
-      l.forEach((w) => inner.append(document.createTextNode(w.textContent)));
+      l.forEach((w) => inner.append(w));
       ln.appendChild(inner);
       vis.appendChild(ln);
       return inner;
@@ -161,16 +226,15 @@
   gsap.to('.target', { scale: 1.14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* ---------- Reveal di blocchi: sale e compare ---------- */
-  const revealSel = '.facts>div, .stats li, .chi-photo figcaption, .mk-roles, .work, .demos li, .note, .mk-cta, .arco-note, .ph figcaption, .fuori-text dl>div, .fuori-photos li, .cta-lead, .clinks li';
+  const revealSel = '.facts>div, .stats li, .chi-photo, .mk-roles, .work, .demos li, .note, .mk-cta, .arco-note, .ph, .fuori-text dl>div, .fuori-photos li, .cta-lead, .clinks li';
   ScrollTrigger.batch(revealSel, {
     start: 'top 90%', once: true,
-    onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.09, overwrite: true })
+    onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: 'power4.out', stagger: 0.09, overwrite: true })
   });
 
   /* ---------- Titoli di sezione: numero e linea ---------- */
   $$('.sec-head').forEach((h) => {
     gsap.to($('.sec-no', h), { opacity: 1, duration: 0.8, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
-    gsap.to($('.sec-rule', h), { opacity: 1, scaleX: 1, duration: 1.4, ease: 'power3.inOut', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
   });
 
   /* ---------- Parallax leggero sulle foto ---------- */
