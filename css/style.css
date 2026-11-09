@@ -217,7 +217,32 @@ section{position:relative}
   .fuori-photos{grid-template-columns:1fr 1fr}
   .fuori-photos li:last-child{grid-column:1/-1;max-width:50%}
 }
-/* @@contatti */
+/* ---------- 04 Contatti ---------- */
+.contatti{overflow:hidden;padding-bottom:clamp(88px,12vw,160px)}
+.cta-target{position:absolute;z-index:0;right:-18vw;top:50%;width:min(95vw,980px);max-width:none;aspect-ratio:1;transform:translateY(-46%);overflow:visible;pointer-events:none}
+.cta-target circle{fill:none;stroke:var(--accent);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.4}
+.cta-target circle:nth-child(odd){opacity:.22}
+.cta-target .dot{fill:var(--accent);stroke:none;opacity:.9}
+.contatti .wrap{position:relative;z-index:1}
+.cta-title{font-size:clamp(60px,10vw,170px);line-height:.9}
+.cta-title .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.cta-title .ln>span{display:block}
+.cta-lead{margin-top:clamp(20px,3vw,36px);font-size:clamp(18px,1.8vw,24px);color:var(--muted);max-width:24em}
+.clinks{margin-top:clamp(36px,5vw,64px);max-width:760px;border-top:1px solid var(--rule)}
+.clinks a{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule);text-decoration:none;transition:padding .45s var(--ease),color .3s}
+.clinks .k{font-family:var(--f-display);font-size:clamp(28px,3.4vw,44px);text-transform:uppercase;line-height:1}
+.clinks .v{font-size:15px;color:var(--muted);text-align:right;word-break:break-word}
+.clinks a:hover{padding-left:16px;color:var(--accent)}
+.clinks a:hover .v{color:var(--ink)}
+/* ---------- Footer ---------- */
+.foot{border-top:1px solid var(--rule);padding:36px 0}
+.foot-in{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px 36px;font-size:14px;color:var(--muted)}
+.foot-in .brand{color:var(--ink)}
+.foot-in p{margin:0}
+@media (max-width:760px){
+  .cta-target{right:-45vw;width:130vw}
+  .foot-in{grid-template-columns:1fr}
+}
 /* @@animazioni */
 
 /* ---------- Responsive ---------- */
