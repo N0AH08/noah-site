@@ -5,6 +5,6 @@
   <path d="M32 6v8M32 50v8M6 32h8M50 32h8" stroke="#f1eee8" stroke-width="2.2" stroke-linecap="round"/>
   <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.2">
     <path d="M24 41V23M40 41V23" stroke="#f1eee8"/>
-    <path d="M24 23 40 41" stroke="#d4ff3a"/>
+    <path d="M24 23 40 41" stroke="#8f6bff"/>
   </g>
 </svg>
