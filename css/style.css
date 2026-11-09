@@ -93,8 +93,8 @@ section{position:relative}
 .hero-line{margin-top:clamp(18px,2.4vw,34px);font-size:clamp(19px,1.9vw,26px);line-height:1.35;color:var(--muted);max-width:19em}
 .hero-photo{position:relative;z-index:1;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r);background:var(--bg-2)}
 .hero-photo img{width:100%;height:100%;object-fit:cover}
-.target{position:absolute;z-index:0;left:50%;top:50%;width:min(190%,880px);max-width:none;aspect-ratio:1;transform:translate(-50%,-50%);overflow:visible;pointer-events:none}
-.target circle{fill:none;stroke:var(--accent);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.55}
+.target{position:absolute;z-index:0;inset:0;margin:auto;width:min(190%,880px);max-width:none;aspect-ratio:1;overflow:visible;pointer-events:none}
+.target circle{fill:none;stroke:var(--accent);stroke-width:.4;opacity:.55}
 .target circle:nth-child(odd){opacity:.3}
 /* indicatore di scroll */
 .cue{position:absolute;left:var(--pad);bottom:28px;display:flex;align-items:center;gap:14px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none}
@@ -138,7 +138,7 @@ section{position:relative}
 
 /* lavori */
 .works{display:grid;gap:clamp(20px,3vw,36px)}
-.work{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;will-change:transform}
+.work{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
 .work--flip{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
 .work--flip .work-media{order:2}
 .work-media{position:relative;padding:clamp(18px,3vw,44px);background:radial-gradient(120% 90% at 20% 0%,rgba(143,107,255,.16),transparent 60%)}
@@ -190,7 +190,7 @@ section{position:relative}
 .sep{display:flex;align-items:center;gap:clamp(14px,3vw,36px);margin-top:clamp(72px,10vw,150px)}
 .sep-line{flex:1;height:1px;background:var(--rule);transform-origin:center}
 .sep-target{width:clamp(72px,9vw,120px);overflow:visible;flex:none}
-.sep-target circle{fill:none;stroke:var(--accent);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.sep-target circle{fill:none;stroke:var(--accent);stroke-width:1}
 .sep-target .dot{fill:var(--accent);stroke:none}
 @media (max-width:900px){
   .arco-intro{grid-template-columns:1fr}
@@ -219,8 +219,8 @@ section{position:relative}
 }
 /* ---------- 04 Contatti ---------- */
 .contatti{overflow:hidden;padding-bottom:clamp(88px,12vw,160px)}
-.cta-target{position:absolute;z-index:0;right:-18vw;top:50%;width:min(95vw,980px);max-width:none;aspect-ratio:1;transform:translateY(-46%);overflow:visible;pointer-events:none}
-.cta-target circle{fill:none;stroke:var(--accent);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.4}
+.cta-target{position:absolute;z-index:0;right:-18vw;top:0;bottom:0;margin:auto 0;width:min(95vw,980px);max-width:none;aspect-ratio:1;overflow:visible;pointer-events:none}
+.cta-target circle{fill:none;stroke:var(--accent);stroke-width:.26;opacity:.4}
 .cta-target circle:nth-child(odd){opacity:.22}
 .cta-target .dot{fill:var(--accent);stroke:none;opacity:.9}
 .contatti .wrap{position:relative;z-index:1}
@@ -243,7 +243,24 @@ section{position:relative}
   .cta-target{right:-45vw;width:130vw}
   .foot-in{grid-template-columns:1fr}
 }
-/* @@animazioni */
+/* ---------- Animazioni: stati iniziali (solo se il movimento è consentito) ---------- */
+.ln{display:block;overflow:hidden;padding-bottom:.08em}
+.ln>span{display:block}
+.js-anim [data-split],.js-anim .sec-head h2{visibility:hidden}
+.js-anim .hero-photo,.js-anim .hero-line,.js-anim .cue{opacity:0}
+.js-anim .hero-name .ln>span{transform:translateY(105%)}
+.js-anim .target circle,.js-anim .sep-target circle,.js-anim .cta-target circle{stroke-dasharray:1;stroke-dashoffset:1}
+.js-anim .sec-no,.js-anim .sec-rule{opacity:0}
+.js-anim .sec-rule,.js-anim .sep-line{transform:scaleX(0)}
+.js-anim :is(.facts>div,.stats li,.chi-photo figcaption,.mk-roles,.work,.demos li,.note,.mk-cta,.arco-note,.ph figcaption,.fuori-text dl>div,.fuori-photos li,.cta-lead,.clinks li){opacity:0;transform:translateY(32px)}
+/* cursore custom (solo mouse) */
+.cursor{position:fixed;left:0;top:0;z-index:600;pointer-events:none;mix-blend-mode:difference;opacity:0;transition:opacity .3s}
+.cursor.on{opacity:1}
+.cursor i{position:absolute;left:0;top:0;width:38px;height:38px;border:1.5px solid #fff;border-radius:50%;transition:width .3s var(--ease),height .3s var(--ease),background .3s}
+.cursor b{position:absolute;left:0;top:0;width:5px;height:5px;border-radius:50%;background:#fff}
+.cursor.big i{width:78px;height:78px;background:#fff}
+.has-cursor,.has-cursor a,.has-cursor button{cursor:none}
+
 
 /* ---------- Responsive ---------- */
 @media (max-width:760px){
