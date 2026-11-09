@@ -82,7 +82,32 @@ section{position:relative}
 .lnk{display:inline-block;font-weight:700;text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:3px;transition:color .25s}
 .lnk:hover{color:var(--accent)}
 
-/* @@hero */
+/* ---------- Hero ---------- */
+.hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 90px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:center;gap:clamp(24px,4vw,64px)}
+.hero-copy{grid-column:1;grid-row:1}
+.hero-visual{grid-column:2;grid-row:1;position:relative;justify-self:end;width:min(100%,460px)}
+.hero-name{font-size:clamp(84px,15.5vw,250px);line-height:.84}
+.hero-name .ln{display:block;overflow:hidden;padding-bottom:.04em}
+.hero-name .ln>span{display:block}
+.hero-line{margin-top:clamp(18px,2.4vw,34px);font-size:clamp(19px,1.9vw,26px);line-height:1.35;color:var(--muted);max-width:19em}
+.hero-photo{position:relative;z-index:1;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r);background:var(--bg-2)}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.target{position:absolute;z-index:0;left:50%;top:50%;width:min(190%,880px);max-width:none;aspect-ratio:1;transform:translate(-50%,-50%);overflow:visible;pointer-events:none}
+.target circle{fill:none;stroke:var(--accent);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.55}
+.target circle:nth-child(odd){opacity:.3}
+/* indicatore di scroll */
+.cue{position:absolute;left:var(--pad);bottom:28px;display:flex;align-items:center;gap:14px;font-size:13px;font-weight:600;color:var(--muted);text-decoration:none}
+.cue i{position:relative;width:1px;height:46px;background:var(--rule);overflow:hidden}
+.cue i::after{content:"";position:absolute;left:0;top:0;width:1px;height:100%;background:var(--accent);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+@media (max-width:900px){
+  .hero{padding:96px 0 90px;align-items:flex-start}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-visual{grid-column:1;grid-row:1;justify-self:start;width:min(70vw,360px);margin-left:6px}
+  .hero-copy{grid-column:1;grid-row:2}
+  .target{width:170%}
+}
 /* @@mockly */
 /* @@arco */
 /* @@fuori */
