@@ -108,6 +108,16 @@
     if (!reduce) (function loop() { if (!document.hidden) draw(); requestAnimationFrame(loop); })();
   }
 
+  /* ---------- Strisce di foto: frecce avanti e indietro ---------- */
+  $$('[data-strip]').forEach((box) => {
+    const strip = $('.strip', box);
+    const step = () => { const li = $('li', strip); return li ? li.getBoundingClientRect().width * 1.6 : 320; };
+    const go = (dir) => strip.scrollBy({ left: dir * step(), behavior: reduce ? 'auto' : 'smooth' });
+    $('[data-prev]', box).addEventListener('click', () => go(-1));
+    $('[data-next]', box).addEventListener('click', () => go(1));
+    strip.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') go(1); if (e.key === 'ArrowLeft') go(-1); });
+  });
+
   /* ---------- Contatori (anche senza animazione mostrano il valore finale) ---------- */
   const counters = $$('[data-count]');
   const runCounter = (el) => {
@@ -226,7 +236,7 @@
   gsap.to('.target', { scale: 1.14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   /* ---------- Reveal di blocchi: sale e compare ---------- */
-  const revealSel = '.facts>div, .stats li, .chi-photo, .mk-roles, .work, .demos li, .note, .mk-cta, .arco-note, .ph, .fuori-text dl>div, .fuori-photos li, .cta-lead, .clinks li';
+  const revealSel = '.facts>div, .stats li, .chi-photo, .mk-roles, .work, .demos li, .note, .mk-cta, .arco-note, .ph, .fuori-head dl>div, .strip-wrap, .cta-lead, .clinks li';
   ScrollTrigger.batch(revealSel, {
     start: 'top 90%', once: true,
     onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: 'power4.out', stagger: 0.09, overwrite: true })

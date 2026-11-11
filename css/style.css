@@ -182,15 +182,22 @@ main,.foot{position:relative;z-index:1}
 
 /* ---------- Fuori dal lavoro ---------- */
 .sec--small{padding-top:0}
-.fuori-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(28px,5vw,80px);align-items:start}
-.fuori-text h3{font-size:clamp(2.6rem,1.6rem + 3vw,4.6rem);margin-bottom:22px}
-.fuori-text dl>div{margin-bottom:16px}
-.fuori-text dt{font-size:.95rem;color:var(--soft)}
-.fuori-text dd{font-size:1.15rem}
-.fuori-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.6vw,20px);align-items:start}
-.fuori-photos .frame{overflow:hidden;border-radius:var(--r);background:var(--panel);aspect-ratio:4/5}
-.fuori-photos img{width:100%;height:100%;object-fit:cover}
-.fuori-photos figcaption{margin-top:10px;font-size:.95rem;color:var(--soft)}
+
+.fuori-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(28px,4vw,52px)}
+.fuori-head h3{font-size:clamp(2.6rem,1.6rem + 3vw,4.6rem)}
+.fuori-head dl>div{margin-bottom:12px}
+.fuori-head dt{font-size:.95rem;color:var(--soft)}
+.fuori-head dd{font-size:1.15rem}
+/* strisce di foto che scorrono di lato (ogni foto intera, senza tagli) */
+.strip-wrap{position:relative}
+.strip{display:flex;gap:clamp(10px,1.4vw,18px);overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:4px;-webkit-overflow-scrolling:touch;outline-offset:6px}
+.strip::-webkit-scrollbar{display:none}
+.strip li{flex:none;scroll-snap-align:start}
+.strip img{height:min(60vh,520px);width:auto;max-width:none;border-radius:var(--r);background:var(--panel)}
+.strip figcaption{margin-top:10px;font-size:.95rem;color:var(--soft)}
+.strip-ctrl{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.strip-ctrl button{width:48px;height:48px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:background .25s,border-color .25s}
+.strip-ctrl button:hover{background:rgba(255,255,255,.12);border-color:var(--sky)}
 
 /* ---------- 04 Contatti ---------- */
 .contatti{overflow:hidden}
@@ -225,7 +232,7 @@ main,.foot{position:relative;z-index:1}
 .js-anim .target circle,.js-anim .sep-target circle,.js-anim .cta-target circle{stroke-dasharray:1;stroke-dashoffset:1}
 .js-anim .sec-no{opacity:0}
 .js-anim .sep-line{transform:scaleX(0)}
-.js-anim :is(.facts>div,.stats li,.chi-photo,.mk-roles,.work,.demos li,.note,.mk-cta,.arco-note,.ph,.fuori-text dl>div,.fuori-photos li,.cta-lead,.clinks li){opacity:0;transform:translateY(28px)}
+.js-anim :is(.facts>div,.stats li,.chi-photo,.mk-roles,.work,.demos li,.note,.mk-cta,.arco-note,.ph,.fuori-head dl>div,.strip-wrap,.cta-lead,.clinks li){opacity:0;transform:translateY(28px)}
 /* cursore custom (solo mouse) */
 .cursor{position:fixed;left:0;top:0;z-index:600;pointer-events:none;mix-blend-mode:difference;opacity:0;transition:opacity .3s}
 .cursor.on{opacity:1}
@@ -242,7 +249,7 @@ main,.foot{position:relative;z-index:1}
   .hero-visual{grid-column:1;grid-row:1;justify-self:start;width:min(70vw,360px);margin-left:6px}
   .hero-copy{grid-column:1;grid-row:2}
   .target{width:170%}
-  .chi-grid,.mk-intro,.arco-intro,.fuori-grid,.mk-cta{grid-template-columns:1fr}
+  .chi-grid,.mk-intro,.arco-intro,.fuori-head,.mk-cta{grid-template-columns:1fr}
   .chi-photo{max-width:340px}
   .stats{grid-template-columns:1fr 1fr}
   .work,.work--flip{grid-template-columns:1fr}
@@ -267,9 +274,8 @@ main,.foot{position:relative;z-index:1}
   .scene-bg{background:radial-gradient(140% 50% at 50% 0,var(--glow),transparent 70%),var(--night)}
 }
 @media (max-width:560px){
+  .strip img{height:min(54vh,440px)}
   .facts{grid-template-columns:1fr}
-  .fuori-photos{grid-template-columns:1fr 1fr}
-  .fuori-photos li:last-child{grid-column:1/-1;max-width:50%}
   .foot-in{grid-template-columns:1fr}
   .cta-target{right:-45vw;width:130vw}
 }
